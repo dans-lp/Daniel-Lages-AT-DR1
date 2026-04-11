@@ -1,0 +1,22 @@
+.container {
+   display: flex;
+   flex-wrap: wrap;
+   align-content: center;
+   justify-content: center;
+}
+
+.image_grid {
+   width: 100%;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+   margin-top: 10px;
+   justify-content: center;
+}
+
+button {
+   width: 25px;
+   height: 25px;
+   margin-left: 10px;
+   margin-right: 10px;
+}

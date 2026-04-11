@@ -1,0 +1,29 @@
+.menu_horizontal {
+
+   display: flex;
+   border: 1px solid;
+   border-color: red;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
+   height: 40px;
+}
+
+.menu_logo {
+   display: flex;
+   height: 30px;
+   margin-left: 10px;
+}
+
+.menu_items {
+   display: flex;
+   align-content: left;
+   list-style: none;
+   gap: 10px;
+}
+
+.menu_icon {
+   display: flex;
+   margin-right: 10px;
+   font-size: 25px;
+}
