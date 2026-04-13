@@ -1,6 +1,21 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import styles from './Ex6.module.css'
 
+function Item({ alterarQuantidade, index, id, nome, preco, quantidade }) {
+
+   return (
+      <tr key={id}>
+         <td>{nome}</td>
+         <td>{preco}</td>
+         <td>
+            <button className={styles.button} onClick={() => alterarQuantidade(index, quantidade - 1)}>-</button>
+            <span>{quantidade}</span>
+            <button className={styles.button} onClick={() => alterarQuantidade(index, quantidade + 1)}>+</button>
+         </td>
+         <td>{(quantidade * preco).toLocaleString(navigator.language, { minimumFractionDigits: 2 })}</td>
+      </tr>
+   )
+}
 
 function Ex6() {
    const itens_iniciais = [
@@ -12,18 +27,43 @@ function Ex6() {
    ];
    const [rows, setRows] = useState(itens_iniciais);
 
+   const alterarQuantidade = (index, quantidade) => {
+      if (quantidade < 0) {
+         return;
+      }
 
+      const rowsCpy = [...rows];
 
-   const grandTotal = itens_iniciais.reduce((a, i) => a + i.preco * i.quantidade, 0);
-   const totalUnits = itens_iniciais.reduce((a, i) => a + i.quantidade, 0);
+      rowsCpy[index].quantidade = quantidade;
+      setRows(rowsCpy);
+   };
 
+   let sum = 0;
+   let qtd = 0;
+   let maiorCusto = { nome: 'N/A', total: 0 };
 
+   rows.forEach((item) => {
+      const valorTotal = item.preco * item.quantidade;
+      sum += valorTotal;
+      qtd += item.quantidade;
 
-
+      if (valorTotal > maiorCusto.total) {
+         maiorCusto = { nome: item.nome, total: valorTotal }
+      }
+   });
 
    return (
       <div className={styles.container}>
          <div className={styles.header}>
+            <h3>
+               Compras Mercado
+            </h3>
+         </div>
+         <div className={styles.infos}>
+            <p>Total Compra: <br />R${sum.toLocaleString(navigator.language, { minimumFractionDigits: 2 })}</p>
+            <p>Quantidade total: <br />{qtd}</p>
+            <p>Item de Maior custo: <br />{maiorCusto.nome}</p>
+
          </div>
          <table className={styles.table}>
             <thead>
@@ -32,24 +72,12 @@ function Ex6() {
                   <th>Preço(R$)</th>
                   <th>Quantidade</th>
                   <th>Subtotal</th>
-                  <th></th>
-
                </tr>
             </thead>
             <tbody>
-               {rows.map(row => (
-                  <tr key={row.id}>
-                     <td>{row.nome}</td>
-                     <td>{row.preco}</td>
-                     <td>{row.quantidade}</td>
-                     <td>{(row.quantidade * row.preco).toLocaleString(navigator.language, { minimumFractionDigits: 2 })}</td>
-
-                  </tr>
-               ))}
+               {rows.map((row, index) => <Item alterarQuantidade={alterarQuantidade} index={index} {...row} />)}
             </tbody>
          </table>
-         <p>Total Compra: {grandTotal}</p>
-         <p>Quantidade total de itens: {totalUnits}</p>
       </div>
    );
 }
