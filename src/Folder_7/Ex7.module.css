@@ -1,0 +1,12 @@
+.container {
+   display: flex;
+   flex-direction: column;
+   border: solid 2px red;
+   width: 300px;
+}
+
+.upper {
+   display: grid;
+   grid-template-rows: 2fr 2fr 1fr;
+   border: solid 1px red;
+}
