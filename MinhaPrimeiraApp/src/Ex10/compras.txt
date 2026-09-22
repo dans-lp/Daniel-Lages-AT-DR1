@@ -1,0 +1,15 @@
+
+--- Produto 1 ---
+Nome: Maça
+Quantidade: 12
+Preço unitário: $4.50
+
+--- Produto 2 ---
+Nome: Café
+Quantidade: 3
+Preço unitário: $34.33
+
+--- Produto 3 ---
+Nome: Sabonete
+Quantidade: 5
+Preço unitário: $2.10
